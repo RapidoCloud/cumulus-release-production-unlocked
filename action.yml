@@ -1,0 +1,21 @@
+name: "Release Production - Unlocked"
+description: "Promotes unlocked production package version to release"
+inputs:
+  cumulusci-version:
+    description: "version of CumulusCI to install"
+    required: false
+  sfdx-version:
+    description: "version of SFDX to install"
+    required: false
+  dev-hub-auth-url:
+    description: "SFDX auth URL for the Dev Hub"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - uses: cumulus-actions/run-flow-scratch@v1
+      with:
+        dev-hub-auth-url: "${{ inputs.dev-hub-auth-url }}"
+        cumulusci-version: "${{ inputs.cumulusci-version }}"
+        sfdx-version: "${{ inputs.sfdx-version }}"
+        flow-name: release_unlocked_production
